@@ -11,169 +11,144 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #111827; /* Gray 900 */
-            color: #d1d5db; /* Gray 300 */
-            overflow-x: hidden;
+            background-color: #0f172a; /* Slate 900 */
+            color: #94a3b8; /* Slate 400 */
         }
-        .aurora-background {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .aurora-background::before,
-        .aurora-background::after {
-            content: '';
-            position: absolute;
-            width: 100vmin;
-            height: 100vmin;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.15;
-            will-change: transform, opacity;
-        }
-        .aurora-background::before {
-            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
-            top: -25%;
-            left: -25%;
-            animation: move-aurora-1 15s infinite alternate ease-in-out;
-        }
-        .aurora-background::after {
-            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
-            bottom: -25%;
-            right: -25%;
-            animation: move-aurora-2 17s infinite alternate ease-in-out;
-        }
-
-        @keyframes move-aurora-1 {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50%, 50%); }
-        }
-        @keyframes move-aurora-2 {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(-50%, -50%); }
-        }
-
         .highlight {
             color: #3b82f6; /* Blue 500 */
         }
         .btn-primary {
-            @apply inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75;
+            @apply inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-sm transition-all duration-300 hover:bg-blue-700 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500;
         }
-        .content-card {
-            background-color: rgba(31, 41, 55, 0.5); /* Gray-800 with transparency */
-            border: 1px solid rgba(75, 85, 99, 0.5); /* Gray-600 with transparency */
-            backdrop-filter: blur(10px);
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .bento-item {
+            background-color: #1e293b; /* Slate 800 */
+            border: 1px solid #334155; /* Slate 700 */
             border-radius: 0.75rem;
-            padding: 2rem;
+            padding: 1.5rem;
             transition: all 0.3s ease;
         }
-        .content-card:hover {
-            border-color: rgba(59, 130, 246, 0.7);
+        .bento-item:hover {
             transform: translateY(-5px);
+            box-shadow: 0 8px 25px -5px rgba(0,0,0,0.2);
+            border-color: #3b82f6; /* Blue 500 */
+        }
+        .section-heading {
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 0.5rem;
+            display: inline-block;
         }
     </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="antialiased">
 
-    <div class="aurora-background"></div>
-
-    <div class="relative mx-auto max-w-3xl px-6 py-12 md:py-24">
+    <div class="mx-auto max-w-4xl px-6 py-12 md:py-24">
         
-        <!-- Header Section -->
-        <header class="text-center mb-24">
-            <img src="profile.jpg" alt="Rajneesh Sahai" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-500/50 shadow-2xl" onerror="this.onerror=null; this.src='https://placehold.co/128x128/111827/3b82f6?text=RS';">
-            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Rajneesh Sahai</h1>
-            <p class="mt-4 text-lg md:text-xl text-gray-400">Backend Software Engineer</p>
-            <p class="mt-6 max-w-2xl mx-auto text-gray-300">
-                I build resilient <span class="highlight font-semibold">distributed backend systems</span> and high-performance data solutions with a passion for clean architecture and system reliability.
-            </p>
-            <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
-                <button id="resume-button-main" class="btn-primary w-full sm:w-auto">View My Resume</button>
-                <a href="mailto:rajneesh.sahay79@gmail.com" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">rajneesh.sahay79@gmail.com</a>
-             </div>
-        </header>
-
-        <main class="space-y-16">
-            <!-- Experience Section -->
-            <section id="experience">
-                <h2 class="text-2xl font-bold text-white mb-8 text-center">Work Experience</h2>
-                <div class="space-y-8">
-                    <div class="content-card">
-                        <div class="flex justify-between items-baseline mb-2">
-                            <h3 class="text-xl font-semibold text-white">Backend Software Engineer - II</h3>
-                            <div class="text-sm text-gray-400">2024 — Present</div>
-                        </div>
-                        <p class="font-medium text-blue-400 mb-4">New Relic</p>
-                        <p class="text-gray-400">Focused on enhancing database performance and reliability for high-volume services. Key contributions include tuning YugabyteDB clusters, architecting a Kafka-based data migration service, and optimizing resource utilization to reduce costs (COGS).</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
-                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">YugabyteDB</span>
-                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kafka</span>
-                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kubernetes</span>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                         <div class="flex justify-between items-baseline mb-2">
-                            <h3 class="text-xl font-semibold text-white">Software Engineer - II</h3>
-                            <div class="text-sm text-gray-400">2021 — 2024</div>
-                        </div>
-                        <p class="font-medium text-blue-400 mb-4">NCR Corporation</p>
-                        <p class="text-gray-400">Developed and maintained critical features for a large-scale ATM monitoring application. Key achievements include increasing data transfer efficiency by over 20%, resolving more than 50 customer-facing issues, and improving user experience with a new dynamic filtering system.</p>
-                        <div class="mt-4 flex flex-wrap gap-2">
-                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
-                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Spring Boot</span>
-                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">IBM MQ</span>
-                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Angular</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <!-- Education Section -->
-            <section id="education">
-                <h2 class="text-2xl font-bold text-white mb-8 text-center">Education</h2>
-                <div class="content-card">
-                    <div class="flex justify-between items-baseline mb-2">
-                        <h3 class="text-xl font-semibold text-white">B.Tech, Computer Science & Engineering</h3>
-                        <div class="text-sm text-gray-400">2017 — 2021</div>
-                    </div>
-                    <p class="font-medium text-blue-400">National Institute of Technology, Calicut</p>
-                </div>
-            </section>
-
-            <!-- Social Links -->
-            <section class="text-center mt-24">
-                 <div class="mt-12 flex justify-center gap-6">
-                    <a href="https://github.com/RJ2523" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">
+        <!-- Header -->
+        <header class="flex flex-col sm:flex-row items-center gap-8 mb-20">
+            <img src="profile.jpg" alt="Rajneesh Sahai" class="w-32 h-32 rounded-full shadow-lg border-4 border-slate-700" onerror="this.onerror=null; this.src='https://placehold.co/128x128/0f172a/3b82f6?text=RS';">
+            <div>
+                <h1 class="text-4xl md:text-5xl font-bold text-slate-100">Rajneesh Sahai</h1>
+                <p class="mt-2 text-xl text-slate-400">Backend Software Engineer</p>
+                <p class="mt-4 text-slate-400 max-w-lg">
+                    I build resilient and high-performance <span class="highlight font-semibold">distributed backend systems</span> with a focus on clean architecture and system reliability.
+                </p>
+                 <div class="mt-6 flex items-center gap-4">
+                    <button id="resume-button-main" class="btn-primary">View My Resume</button>
+                    <a href="https://github.com/RJ2523" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-blue-400 transition-colors">
                         <span class="sr-only">GitHub</span>
-                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                        <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
                     </a>
-                    <a href="https://www.linkedin.com/in/rajneesh-sahai-918324100/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">
+                    <a href="https://www.linkedin.com/in/rajneesh-sahai-918324100/" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-blue-400 transition-colors">
                         <span class="sr-only">LinkedIn</span>
-                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                        <svg class="h-7 w-7" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
                     </a>
                  </div>
+            </div>
+        </header>
+
+        <main class="space-y-20">
+            <!-- Experience Section -->
+            <section id="experience">
+                <h2 class="text-3xl font-bold text-slate-100 mb-8 section-heading">Career Journey</h2>
+                <div class="space-y-12">
+                    <div class="flex gap-6">
+                        <div class="text-right text-sm text-slate-500 w-24 pt-1 flex-shrink-0">2024 — Present</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-200">Backend Software Engineer II at <span class="highlight">New Relic</span></h3>
+                            <p class="mt-2 text-slate-400">Focused on enhancing database performance (YugabyteDB) and reliability for high-volume services and architecting Kafka-based data migration services.</p>
+                            <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">YugabyteDB</span>
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kafka</span>
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kubernetes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex gap-6">
+                         <div class="text-right text-sm text-slate-500 w-24 pt-1 flex-shrink-0">2021 — 2024</div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-200">Software Engineer II at <span class="highlight">NCR Corporation</span></h3>
+                            <p class="mt-2 text-slate-400">Increased data transfer efficiency by over 20% for a large-scale ATM monitoring application and resolved 50+ customer-facing issues.</p>
+                             <div class="mt-4 flex flex-wrap gap-2">
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Spring Boot</span>
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">IBM MQ</span>
+                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Angular</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Education Section -->
+            <section id="education">
+                <h2 class="text-3xl font-bold text-slate-100 mb-8 section-heading">Education</h2>
+                <div class="flex gap-6">
+                    <div class="text-right text-sm text-slate-500 w-24 pt-1 flex-shrink-0">2017 — 2021</div>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-200">B.Tech in Computer Science & Engineering</h3>
+                        <p class="mt-1 text-slate-400">National Institute of Technology, Calicut</p>
+                    </div>
+                </div>
             </section>
         </main>
+
+        <footer class="text-center mt-24 border-t border-slate-800 pt-8">
+            <p class="text-slate-500">Let's build something great together.</p>
+            <a href="mailto:rajneesh.sahay79@gmail.com" class="text-blue-500 hover:text-blue-400 font-medium transition-colors">rajneesh.sahay79@gmail.com</a>
+        </footer>
 
     </div>
 
     <!-- Resume Modal -->
     <div id="resume-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex justify-center items-center p-4">
-        <div class="bg-gray-900 border border-gray-700 rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
-            <div class="flex justify-between items-center p-4 border-b border-gray-700">
-                <h3 class="text-lg font-semibold text-white">My Resume</h3>
-                <button id="close-modal-button" class="text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+        <div class="bg-slate-900 border border-slate-700 rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b border-slate-700">
+                <h3 class="text-lg font-semibold text-slate-100">My Resume</h3>
+                <button id="close-modal-button" class="text-slate-400 hover:text-white text-3xl leading-none">&times;</button>
             </div>
             <div class="flex-grow p-2">
-                <iframe src="resume.pdf" 
-                        class="w-full h-full rounded-b-lg" 
-                        frameborder="0">
-                </iframe>
+                <iframe src="resume.pdf" class="w-full h-full rounded-b-lg" frameborder="0"></iframe>
             </div>
         </div>
     </div>
@@ -188,7 +163,6 @@
                 resumeModal.classList.remove('hidden');
                 document.body.style.overflow = 'hidden';
             };
-
             const closeModal = () => {
                 resumeModal.classList.add('hidden');
                 document.body.style.overflow = '';
@@ -200,7 +174,6 @@
             resumeModal.addEventListener('click', (event) => {
                 if (event.target === resumeModal) closeModal();
             });
-
             document.addEventListener('keydown', (event) => {
                 if (event.key === 'Escape' && !resumeModal.classList.contains('hidden')) closeModal();
             });
