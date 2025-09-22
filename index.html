@@ -20,23 +20,6 @@
         .btn-primary {
             @apply inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-sm transition-all duration-300 hover:bg-blue-700 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500;
         }
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-        }
-        .bento-item {
-            background-color: #1e293b; /* Slate 800 */
-            border: 1px solid #334155; /* Slate 700 */
-            border-radius: 0.75rem;
-            padding: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .bento-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px -5px rgba(0,0,0,0.2);
-            border-color: #3b82f6; /* Blue 500 */
-        }
         .section-heading {
             border-bottom: 2px solid #3b82f6;
             padding-bottom: 0.5rem;
@@ -68,7 +51,7 @@
             <img src="profile.jpg" alt="Rajneesh Sahai" class="w-32 h-32 rounded-full shadow-lg border-4 border-slate-700" onerror="this.onerror=null; this.src='https://placehold.co/128x128/0f172a/3b82f6?text=RS';">
             <div>
                 <h1 class="text-4xl md:text-5xl font-bold text-slate-100">Rajneesh Sahai</h1>
-                <p class="mt-2 text-xl text-slate-400">Backend Software Engineer</p>
+                <p class="mt-2 text-xl text-slate-300">Backend Software Engineer</p>
                 <p class="mt-4 text-slate-400 max-w-lg">
                     I build resilient and high-performance <span class="highlight font-semibold">distributed backend systems</span> with a focus on clean architecture and system reliability.
                 </p>
@@ -94,26 +77,39 @@
                     <div class="flex gap-6">
                         <div class="text-right text-sm text-slate-500 w-24 pt-1 flex-shrink-0">2024 — Present</div>
                         <div>
-                            <h3 class="text-xl font-bold text-slate-200">Backend Software Engineer II at <span class="highlight">New Relic</span></h3>
-                            <p class="mt-2 text-slate-400">Focused on enhancing database performance (YugabyteDB) and reliability for high-volume services and architecting Kafka-based data migration services.</p>
+                            <h3 class="text-xl font-bold text-slate-200 flex items-center gap-4">
+                                <span class="bg-slate-200 rounded-md p-1 flex-shrink-0">
+                                    <img src="newrelic.jpg" alt="New Relic Logo" class="w-7 h-7" onerror="this.onerror=null; this.parentElement.innerHTML = `<div class='w-7 h-7 flex items-center justify-center bg-slate-700 text-slate-300 text-xs font-bold rounded-md'>NR</div>`">
+                                </span>
+                                <span>Backend Software Engineer II at <span class="highlight">New Relic</span></span>
+                            </h3>
+                            <p class="mt-2 text-slate-400">Improving database performance for high-volume services by tuning YugabyteDB and building a resilient data migration service with Kafka. Also contributing to cost-saving infrastructure optimizations.</p>
                             <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">YugabyteDB</span>
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kafka</span>
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kubernetes</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kotlin</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">YugabyteDB</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kafka</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kubernetes</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Docker</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Helm</span>
                             </div>
                         </div>
                     </div>
                     <div class="flex gap-6">
                          <div class="text-right text-sm text-slate-500 w-24 pt-1 flex-shrink-0">2021 — 2024</div>
                         <div>
-                            <h3 class="text-xl font-bold text-slate-200">Software Engineer II at <span class="highlight">NCR Corporation</span></h3>
-                            <p class="mt-2 text-slate-400">Increased data transfer efficiency by over 20% for a large-scale ATM monitoring application and resolved 50+ customer-facing issues.</p>
+                             <h3 class="text-xl font-bold text-slate-200 flex items-center gap-4">
+                                <span class="bg-slate-200 rounded-md p-1 flex-shrink-0">
+                                    <img src="ncr.jpg" alt="NCR Corporation Logo" class="w-7 h-7" onerror="this.onerror=null; this.parentElement.innerHTML = `<div class='w-7 h-7 flex items-center justify-center bg-slate-700 text-slate-300 text-xs font-bold rounded-md'>NCR</div>`">
+                                </span>
+                                <span>Software Engineer II at <span class="highlight">NCR Corporation</span></span>
+                            </h3>
+                            <p class="mt-2 text-slate-400">Engineered key features for a large-scale ATM monitoring application, increasing data transfer efficiency by over 20%. Additionally, I enhanced a core data module and resolved over 50 customer issues, directly contributing to system stability and client satisfaction.</p>
                              <div class="mt-4 flex flex-wrap gap-2">
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Spring Boot</span>
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">IBM MQ</span>
-                                <span class="bg-blue-900/50 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Angular</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Spring Boot</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">IBM MQ</span>
+                                <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Angular</span>
                             </div>
                         </div>
                     </div>
@@ -135,7 +131,7 @@
 
         <footer class="text-center mt-24 border-t border-slate-800 pt-8">
             <p class="text-slate-500">Let's build something great together.</p>
-            <a href="mailto:rajneesh.sahay79@gmail.com" class="text-blue-500 hover:text-blue-400 font-medium transition-colors">rajneesh.sahay79@gmail.com</a>
+            <a href="mailto:rajneesh.sahay79@gmail.com" class="text-blue-400 hover:text-blue-300 font-medium transition-colors">rajneesh.sahay79@gmail.com</a>
         </footer>
 
     </div>
@@ -181,4 +177,5 @@
     </script>
 </body>
 </html>
+
 
