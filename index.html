@@ -11,196 +11,169 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #0a192f; /* Navy Blue */
-            color: #ccd6f6; /* Light Slate */
+            background-color: #111827; /* Gray 900 */
+            color: #d1d5db; /* Gray 300 */
+            overflow-x: hidden;
         }
-        .glass-effect {
-            background: rgba(10, 25, 47, 0.85);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(45, 212, 191, 0.1);
+        .aurora-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
         }
+        .aurora-background::before,
+        .aurora-background::after {
+            content: '';
+            position: absolute;
+            width: 100vmin;
+            height: 100vmin;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            will-change: transform, opacity;
+        }
+        .aurora-background::before {
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            top: -25%;
+            left: -25%;
+            animation: move-aurora-1 15s infinite alternate ease-in-out;
+        }
+        .aurora-background::after {
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            bottom: -25%;
+            right: -25%;
+            animation: move-aurora-2 17s infinite alternate ease-in-out;
+        }
+
+        @keyframes move-aurora-1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50%, 50%); }
+        }
+        @keyframes move-aurora-2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
         .highlight {
-            color: #64ffda; /* Aqua/Teal */
+            color: #3b82f6; /* Blue 500 */
         }
         .btn-primary {
-            @apply px-6 py-3 border border-teal-300 text-teal-300 rounded-md transition-all duration-300 hover:bg-teal-300 hover:bg-opacity-10 focus:outline-none focus:ring-2 focus:ring-teal-300;
+            @apply inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75;
         }
-        .section-heading {
-            @apply text-3xl font-bold text-gray-200 mb-8 flex items-center;
+        .content-card {
+            background-color: rgba(31, 41, 55, 0.5); /* Gray-800 with transparency */
+            border: 1px solid rgba(75, 85, 99, 0.5); /* Gray-600 with transparency */
+            backdrop-filter: blur(10px);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
         }
-        .section-heading::after {
-            content: '';
-            display: block;
-            position: relative;
-            top: 2px;
-            width: 150px;
-            height: 1px;
-            margin-left: 20px;
-            background-color: #334155; /* Slate 600 */
+        .content-card:hover {
+            border-color: rgba(59, 130, 246, 0.7);
+            transform: translateY(-5px);
         }
     </style>
 </head>
 <body class="antialiased">
 
-    <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 glass-effect">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold highlight">RS</a>
-            <div class="hidden md:flex space-x-8 items-center">
-                <a href="#about" class="hover:text-teal-300 transition-colors duration-300">About</a>
-                <a href="#experience" class="hover:text-teal-300 transition-colors duration-300">Experience</a>
-                <a href="#education" class="hover:text-teal-300 transition-colors duration-300">Education</a>
-                <a href="#contact" class="hover:text-teal-300 transition-colors duration-300">Contact</a>
-            </div>
-             <button id="resume-button-nav" class="btn-primary hidden md:block">Resume</button>
-        </nav>
-    </header>
+    <div class="aurora-background"></div>
 
-    <main class="container mx-auto px-6">
-
-        <!-- Hero Section -->
-        <section id="hero" class="min-h-screen flex items-center pt-24">
-            <div class="w-full md:w-3/4 lg:w-2/3">
-                <p class="text-teal-300 mb-4 text-lg">Hi, my name is</p>
-                <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-100">Rajneesh Sahai.</h1>
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-400 mt-2">I build things for the web.</h2>
-                <p class="mt-6 max-w-xl text-lg text-gray-400">
-                    I'm a Software Engineer specializing in building reliable, high-performance distributed systems. My focus is on creating robust backend services and tackling complex challenges in data engineering and system architecture.
-                </p>
-                <div class="mt-8 flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-                    <button id="resume-button-hero" class="btn-primary w-full sm:w-auto text-center">View My Resume</button>
-                     <a href="#experience" class="px-6 py-3 border border-transparent text-gray-300 rounded-md transition-all duration-300 hover:text-teal-300 focus:outline-none text-center">See My Work</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Me Section -->
-        <section id="about" class="py-24">
-            <h2 class="section-heading"><span class="highlight mr-2">01.</span> About Me</h2>
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-10">
-                <div class="md:col-span-3 text-gray-400 text-lg space-y-4">
-                    <p>
-                        As a Software Engineer, my passion is building backend systems that are not only functional but also exceptionally reliable and performant. I believe that the best software is resilient by design, capable of handling high-volume traffic and unexpected failures with grace.
-                    </p>
-                    <p>
-                        My toolkit is centered on the Java ecosystem, including Spring Boot, Docker, and Kubernetes. At New Relic, I apply these skills to tune YugabyteDB clusters and develop proactive monitoring solutions, directly preventing downtime and supporting cost-reduction (COGS) initiatives. My work with Kafka extends to architecting data synchronization services with built-in rate-limiting to protect system integrity.
-                    </p>
-                    <p>
-                        Here are a few technologies I’ve been working with recently:
-                    </p>
-                    <ul class="grid grid-cols-2 gap-2 text-gray-300">
-                        <li class="flex items-center"><span class="text-teal-300 mr-2">▹</span>Java & Spring Boot</li>
-                        <li class="flex items-center"><span class="text-teal-300 mr-2">▹</span>Kubernetes & Docker</li>
-                        <li class="flex items-center"><span class="text-teal-300 mr-2">▹</span>Kafka</li>
-                        <li class="flex items-center"><span class="text-teal-300 mr-2">▹</span>YugabyteDB</li>
-                        <li class="flex items-center"><span class="text-teal-300 mr-2">▹</span>Dagger2</li>
-                        <li class="flex items-center"><span class="text-teal-300 mr-2">▹</span>Gradle</li>
-                    </ul>
-                </div>
-                <div class="md:col-span-2 flex justify-center items-start">
-                    <div class="w-64 h-64 rounded-lg relative group">
-                        <div class="absolute inset-0 bg-teal-300 rounded-lg transform transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
-                        <!-- IMPORTANT: Replace this placeholder with your actual photo URL -->
-                        <img src="profile.jpg" 
-                             alt="Rajneesh Sahai"
-                             class="absolute inset-0 w-full h-full object-cover rounded-lg z-10"
-                             onerror="this.onerror=null; this.src='https://placehold.co/400x400/0a192f/64ffda?text=RS';">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="py-24">
-            <h2 class="section-heading"><span class="highlight mr-2">02.</span> Where I've Worked</h2>
-            <div class="max-w-3xl mx-auto">
-                <div class="relative border-l-2 border-teal-800 pl-8 py-4">
-                    <!-- New Relic -->
-                    <div class="mb-12">
-                        <div class="absolute w-4 h-4 bg-teal-300 rounded-full -left-2 mt-1.5"></div>
-                        <h3 class="text-xl font-bold text-gray-100">Backend Software Engineer - II <span class="highlight">@ New Relic</span></h3>
-                        <p class="text-gray-400 mb-2">July 2024 – Present</p>
-                        <ul class="space-y-2 text-gray-400 list-inside">
-                           <li class="flex"><span class="text-teal-300 mr-2 mt-1">▹</span><span>Engineered and tuned YugabyteDB clusters to handle high-volume loads, ensuring production readiness.</span></li>
-                           <li class="flex"><span class="text-teal-300 mr-2 mt-1">▹</span><span>Designed a Kafka-based data sync service with rate-limiting to prevent system overload.</span></li>
-                           <li class="flex"><span class="text-teal-300 mr-2 mt-1">▹</span><span>Contributed to a COGS reduction initiative by migrating clusters to a custom database pool.</span></li>
-                        </ul>
-                    </div>
-                    <!-- NCR Corporation -->
-                    <div class="mb-12">
-                         <div class="absolute w-4 h-4 bg-teal-300 rounded-full -left-2 mt-1.5"></div>
-                        <h3 class="text-xl font-bold text-gray-100">Software Engineer - II <span class="highlight">@ NCR Corporation</span></h3>
-                        <p class="text-gray-400 mb-2">June 2021 – July 2024</p>
-                        <ul class="space-y-2 text-gray-400 list-inside">
-                           <li class="flex"><span class="text-teal-300 mr-2 mt-1">▹</span><span>Increased data transfer efficiency by over 20% for an ATM monitoring application using Spring Boot and IBM MQ.</span></li>
-                           <li class="flex"><span class="text-teal-300 mr-2 mt-1">▹</span><span>Solved 50+ complex customer issues, ensuring seamless functionality and client satisfaction.</span></li>
-                           <li class="flex"><span class="text-teal-300 mr-2 mt-1">▹</span><span>Engineered a dynamic incident filtering feature that significantly enhanced user experience and search speed.</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <div class="relative mx-auto max-w-3xl px-6 py-12 md:py-24">
         
-        <!-- Education Section -->
-        <section id="education" class="py-24">
-            <h2 class="section-heading"><span class="highlight mr-2">03.</span> Education</h2>
-            <div class="max-w-3xl mx-auto">
-                <div class="glass-effect rounded-lg p-6 flex items-center space-x-6">
-                    <div>
-                        <svg class="w-12 h-12 text-teal-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v11.494m-9-5.747h18M5.45 12a6.75 6.75 0 1113.1 0 6.75 6.75 0 01-13.1 0z"></path></svg>
+        <!-- Header Section -->
+        <header class="text-center mb-24">
+            <img src="profile.jpg" alt="Rajneesh Sahai" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-500/50 shadow-2xl" onerror="this.onerror=null; this.src='https://placehold.co/128x128/111827/3b82f6?text=RS';">
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Rajneesh Sahai</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-400">Backend Software Engineer</p>
+            <p class="mt-6 max-w-2xl mx-auto text-gray-300">
+                I build resilient <span class="highlight font-semibold">distributed backend systems</span> and high-performance data solutions with a passion for clean architecture and system reliability.
+            </p>
+        </header>
+
+        <main class="space-y-16">
+            <!-- Experience Section -->
+            <section id="experience">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">Work Experience</h2>
+                <div class="space-y-8">
+                    <div class="content-card">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-semibold text-white">Backend Software Engineer - II</h3>
+                            <div class="text-sm text-gray-400">2024 — Present</div>
+                        </div>
+                        <p class="font-medium text-blue-400 mb-4">New Relic</p>
+                        <p class="text-gray-400">Engineered and tuned YugabyteDB clusters for high-volume loads, designed a Kafka-based data sync service with rate-limiting, and contributed to a COGS reduction initiative by migrating clusters to a custom database pool.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">YugabyteDB</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kafka</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kubernetes</span>
+                        </div>
                     </div>
-                    <div>
-                        <h3 class="text-xl font-bold text-gray-100">B.Tech in Computer Science and Engineering</h3>
-                        <p class="text-gray-300 text-lg">National Institute of Technology, Calicut</p>
-                        <p class="text-gray-400">2017 – 2021</p>
+                    <div class="content-card">
+                         <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-semibold text-white">Software Engineer - II</h3>
+                            <div class="text-sm text-gray-400">2021 — 2024</div>
+                        </div>
+                        <p class="font-medium text-blue-400 mb-4">NCR Corporation</p>
+                        <p class="text-gray-400">Increased data transfer efficiency by over 20% for an ATM monitoring application using Spring Boot and IBM MQ. Solved 50+ complex customer issues and engineered a dynamic incident filtering feature that significantly enhanced user experience.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Spring Boot</span>
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">IBM MQ</span>
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Angular</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+            
+            <!-- Education Section -->
+            <section id="education">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">Education</h2>
+                <div class="content-card">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-semibold text-white">B.Tech, Computer Science & Engineering</h3>
+                        <div class="text-sm text-gray-400">2017 — 2021</div>
+                    </div>
+                    <p class="font-medium text-blue-400">National Institute of Technology, Calicut</p>
+                </div>
+            </section>
 
+            <!-- Resume & Contact -->
+            <section class="text-center mt-24">
+                 <h2 class="text-2xl font-bold text-white mb-4">Let's Connect</h2>
+                 <p class="text-gray-400 max-w-lg mx-auto mb-8">I'm always open to discussing new projects and opportunities. Feel free to view my resume or get in touch.</p>
+                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="resume-button-main" class="btn-primary w-full sm:w-auto">View My Resume</button>
+                    <a href="mailto:rajneesh.sahay79@gmail.com" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">rajneesh.sahay79@gmail.com</a>
+                 </div>
+                 <div class="mt-12 flex justify-center gap-6">
+                    <a href="https://github.com/RJ2523" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rajneesh-sahai-918324100/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                    </a>
+                 </div>
+            </section>
+        </main>
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 text-center">
-            <h2 class="text-2xl text-teal-300 font-medium">What's Next?</h2>
-            <h3 class="text-4xl md:text-5xl font-bold text-gray-100 mt-2">Get In Touch</h3>
-            <p class="mt-4 max-w-xl mx-auto text-lg text-gray-400">
-                I'm always open to discussing new projects, creative ideas, or opportunities to be part of an ambitious team. Feel free to reach out.
-            </p>
-            <div class="mt-8">
-                <a href="mailto:rajneesh.sahay79@gmail.com" class="btn-primary">Say Hello</a>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="py-6">
-        <div class="flex justify-center items-center space-x-6">
-            <a href="https://github.com/RJ2523" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-teal-300 transition-colors duration-300">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.492.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.378.203 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/rajneesh-sahai-918324100/" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-teal-300 transition-colors duration-300">
-                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
-            </a>
-        </div>
-        <p class="text-center text-gray-500 text-sm mt-4">Designed & Built by Rajneesh Sahai</p>
-    </footer>
-
+    </div>
 
     <!-- Resume Modal -->
-    <div id="resume-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex justify-center items-center p-4">
-        <div class="bg-gray-800 rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
+    <div id="resume-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
             <div class="flex justify-between items-center p-4 border-b border-gray-700">
-                <h3 class="text-lg font-semibold text-gray-100">My Resume</h3>
-                <button id="close-modal-button" class="text-gray-400 hover:text-white">&times;</button>
+                <h3 class="text-lg font-semibold text-white">My Resume</h3>
+                <button id="close-modal-button" class="text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
             </div>
             <div class="flex-grow p-2">
-                <!-- 
-                IMPORTANT: Replace this 'src' with the direct link to your resume PDF.
-                For example, if you host it on GitHub, the URL would look something like:
-                https://your-github-username.github.io/your-repo-name/resume.pdf
-                -->
                 <iframe src="resume.pdf" 
-                        class="w-full h-full" 
+                        class="w-full h-full rounded-b-lg" 
                         frameborder="0">
                 </iframe>
             </div>
@@ -211,48 +184,241 @@
         document.addEventListener('DOMContentLoaded', () => {
             const resumeModal = document.getElementById('resume-modal');
             const closeModalButton = document.getElementById('close-modal-button');
-            
-            // Get all buttons that should open the resume
-            const openModalButtons = [
-                document.getElementById('resume-button-nav'),
-                document.getElementById('resume-button-hero')
-            ];
+            const openModalButton = document.getElementById('resume-button-main');
 
             const openModal = () => {
                 resumeModal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
             };
 
             const closeModal = () => {
                 resumeModal.classList.add('hidden');
-                document.body.style.overflow = ''; // Restore background scrolling
+                document.body.style.overflow = '';
             };
             
-            openModalButtons.forEach(button => {
-                if(button) {
-                    button.addEventListener('click', openModal);
-                }
-            });
+            if(openModalButton) openModalButton.addEventListener('click', openModal);
+            if(closeModalButton) closeModalButton.addEventListener('click', closeModal);
 
-            if(closeModalButton) {
-                closeModalButton.addEventListener('click', closeModal);
-            }
-
-            // Close modal by clicking outside of it
             resumeModal.addEventListener('click', (event) => {
-                if (event.target === resumeModal) {
-                    closeModal();
-                }
+                if (event.target === resumeModal) closeModal();
             });
 
-            // Close modal with the Escape key
             document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && !resumeModal.classList.contains('hidden')) {
-                    closeModal();
-                }
+                if (event.key === 'Escape' && !resumeModal.classList.contains('hidden')) closeModal();
             });
         });
     </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rajneesh Sahai - Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #111827; /* Gray 900 */
+            color: #d1d5db; /* Gray 300 */
+            overflow-x: hidden;
+        }
+        .aurora-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .aurora-background::before,
+        .aurora-background::after {
+            content: '';
+            position: absolute;
+            width: 100vmin;
+            height: 100vmin;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            will-change: transform, opacity;
+        }
+        .aurora-background::before {
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            top: -25%;
+            left: -25%;
+            animation: move-aurora-1 15s infinite alternate ease-in-out;
+        }
+        .aurora-background::after {
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            bottom: -25%;
+            right: -25%;
+            animation: move-aurora-2 17s infinite alternate ease-in-out;
+        }
 
+        @keyframes move-aurora-1 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50%, 50%); }
+        }
+        @keyframes move-aurora-2 {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-50%, -50%); }
+        }
+
+        .highlight {
+            color: #3b82f6; /* Blue 500 */
+        }
+        .btn-primary {
+            @apply inline-block px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg transition-all duration-300 hover:bg-blue-700 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75;
+        }
+        .content-card {
+            background-color: rgba(31, 41, 55, 0.5); /* Gray-800 with transparency */
+            border: 1px solid rgba(75, 85, 99, 0.5); /* Gray-600 with transparency */
+            backdrop-filter: blur(10px);
+            border-radius: 0.75rem;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        .content-card:hover {
+            border-color: rgba(59, 130, 246, 0.7);
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="aurora-background"></div>
+
+    <div class="relative mx-auto max-w-3xl px-6 py-12 md:py-24">
+        
+        <!-- Header Section -->
+        <header class="text-center mb-24">
+            <img src="profile.jpg" alt="Rajneesh Sahai" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-500/50 shadow-2xl" onerror="this.onerror=null; this.src='https://placehold.co/128x128/111827/3b82f6?text=RS';">
+            <h1 class="text-4xl md:text-5xl font-bold text-white tracking-tight">Rajneesh Sahai</h1>
+            <p class="mt-4 text-lg md:text-xl text-gray-400">Backend Software Engineer</p>
+            <p class="mt-6 max-w-2xl mx-auto text-gray-300">
+                I build resilient <span class="highlight font-semibold">distributed backend systems</span> and high-performance data solutions with a passion for clean architecture and system reliability.
+            </p>
+        </header>
+
+        <main class="space-y-16">
+            <!-- Experience Section -->
+            <section id="experience">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">Work Experience</h2>
+                <div class="space-y-8">
+                    <div class="content-card">
+                        <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-semibold text-white">Backend Software Engineer - II</h3>
+                            <div class="text-sm text-gray-400">2024 — Present</div>
+                        </div>
+                        <p class="font-medium text-blue-400 mb-4">New Relic</p>
+                        <p class="text-gray-400">Engineered and tuned YugabyteDB clusters for high-volume loads, designed a Kafka-based data sync service with rate-limiting, and contributed to a COGS reduction initiative by migrating clusters to a custom database pool.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">YugabyteDB</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kafka</span>
+                            <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Kubernetes</span>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                         <div class="flex justify-between items-baseline mb-2">
+                            <h3 class="text-xl font-semibold text-white">Software Engineer - II</h3>
+                            <div class="text-sm text-gray-400">2021 — 2024</div>
+                        </div>
+                        <p class="font-medium text-blue-400 mb-4">NCR Corporation</p>
+                        <p class="text-gray-400">Increased data transfer efficiency by over 20% for an ATM monitoring application using Spring Boot and IBM MQ. Solved 50+ complex customer issues and engineered a dynamic incident filtering feature that significantly enhanced user experience.</p>
+                        <div class="mt-4 flex flex-wrap gap-2">
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Java</span>
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Spring Boot</span>
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">IBM MQ</span>
+                             <span class="bg-blue-400/10 text-blue-300 px-3 py-1 text-xs font-medium rounded-full">Angular</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Education Section -->
+            <section id="education">
+                <h2 class="text-2xl font-bold text-white mb-8 text-center">Education</h2>
+                <div class="content-card">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h3 class="text-xl font-semibold text-white">B.Tech, Computer Science & Engineering</h3>
+                        <div class="text-sm text-gray-400">2017 — 2021</div>
+                    </div>
+                    <p class="font-medium text-blue-400">National Institute of Technology, Calicut</p>
+                </div>
+            </section>
+
+            <!-- Resume & Contact -->
+            <section class="text-center mt-24">
+                 <h2 class="text-2xl font-bold text-white mb-4">Let's Connect</h2>
+                 <p class="text-gray-400 max-w-lg mx-auto mb-8">I'm always open to discussing new projects and opportunities. Feel free to view my resume or get in touch.</p>
+                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                    <button id="resume-button-main" class="btn-primary w-full sm:w-auto">View My Resume</button>
+                    <a href="mailto:rajneesh.sahay79@gmail.com" class="text-gray-300 hover:text-blue-400 transition-colors font-medium">rajneesh.sahay79@gmail.com</a>
+                 </div>
+                 <div class="mt-12 flex justify-center gap-6">
+                    <a href="https://github.com/RJ2523" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"></path></svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/rajneesh-sahai-918324100/" target="_blank" rel="noopener noreferrer" class="text-gray-500 hover:text-blue-400 transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-8 w-8" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path></svg>
+                    </a>
+                 </div>
+            </section>
+        </main>
+
+    </div>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="fixed inset-0 bg-black bg-opacity-80 z-50 hidden flex justify-center items-center p-4">
+        <div class="bg-gray-900 border border-gray-700 rounded-lg shadow-2xl w-full max-w-4xl h-full max-h-[90vh] flex flex-col">
+            <div class="flex justify-between items-center p-4 border-b border-gray-700">
+                <h3 class="text-lg font-semibold text-white">My Resume</h3>
+                <button id="close-modal-button" class="text-gray-400 hover:text-white text-3xl leading-none">&times;</button>
+            </div>
+            <div class="flex-grow p-2">
+                <iframe src="resume.pdf" 
+                        class="w-full h-full rounded-b-lg" 
+                        frameborder="0">
+                </iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const resumeModal = document.getElementById('resume-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const openModalButton = document.getElementById('resume-button-main');
+
+            const openModal = () => {
+                resumeModal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            };
+
+            const closeModal = () => {
+                resumeModal.classList.add('hidden');
+                document.body.style.overflow = '';
+            };
+            
+            if(openModalButton) openModalButton.addEventListener('click', openModal);
+            if(closeModalButton) closeModalButton.addEventListener('click', closeModal);
+
+            resumeModal.addEventListener('click', (event) => {
+                if (event.target === resumeModal) closeModal();
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape' && !resumeModal.classList.contains('hidden')) closeModal();
+            });
+        });
+    </script>
 </body>
 </html>
